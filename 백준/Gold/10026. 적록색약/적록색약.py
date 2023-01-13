@@ -17,10 +17,10 @@ def dfs_cb(x, y):
     for d in range(4):
         nx, ny = x + dx[d], y + dy[d]
         if color == 'B':
-            if 0 <= nx < n and 0 <= ny < n and arr[nx][ny] == 'B' and visited_cb[nx][ny] == 0:
+            if 0 <= nx < n and 0 <= ny < n  and visited_cb[nx][ny] == 0 and arr[nx][ny] == 'B':
                 dfs_cb(nx, ny)
         else:
-            if 0 <= nx < n and 0 <= ny < n and arr[nx][ny] != 'B' and visited_cb[nx][ny] == 0:
+            if 0 <= nx < n and 0 <= ny < n  and visited_cb[nx][ny] == 0 and arr[nx][ny] != 'B':
                 dfs_cb(nx, ny)
 
 
