@@ -1,19 +1,26 @@
-import sys
-T = int(sys.stdin.readline())
-for tc in range(T):
-    N, M = map(int, sys.stdin.readline().split())
-    arr = [e for e in range(N)]
-    importance = list(map(int, sys.stdin.readline().split()))
-    cnt = 0
-    while len(arr) > 0:
-        j = importance[arr[0]]
-        for i in range(1, len(arr)):
-            if importance[arr[i]] > j:
-                arr.append(arr.pop(0))
+from collections import deque
+
+
+def f():
+    global cnt
+    while Q:
+        imp, idx = Q.popleft()
+        for i in range(len(Q)):
+            if Q[i][0] > imp:
+                Q.append((imp, idx))
                 break
         else:
-            m = arr.pop(0)
             cnt += 1
-            if m == M:
-                print(cnt)
-                break
+            if idx == M:
+                return cnt
+
+
+T = int(input())
+for tc in range(T):
+    N, M = map(int, input().split())
+    arr = list(map(int, input().split()))
+    Q = deque()
+    for i in range(N):
+        Q.append((arr[i], i))
+    cnt = 0
+    print(f())
