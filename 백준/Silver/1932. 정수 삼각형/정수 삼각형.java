@@ -1,6 +1,7 @@
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.StringTokenizer;
 
@@ -21,8 +22,10 @@ public class Main {
         
         int n = Integer.parseInt(br.readLine());
 
-        ArrayList<Integer>[] arr = new ArrayList[n];
-        ArrayList<Integer>[] dp = new ArrayList[n];
+        // ArrayList<Integer>[] arr = new ArrayList[n];
+        int[][] arr = new int[n][n];
+        // ArrayList<Integer>[] dp = new ArrayList[n];
+        int[][] dp = new int[n][n];
 
         // 입력을 정말 이따구로 밖에 받을 수 없는 것인가...?
         for(int i = 0; i < n; i++) {
@@ -32,33 +35,39 @@ public class Main {
             StringTokenizer st = new StringTokenizer(line);
             int cnt = st.countTokens();
 
-            arr[i] = new ArrayList<Integer>();
-            dp[i] = new ArrayList<Integer>();
+            // arr[i] = new ArrayList<Integer>();
+            // dp[i] = new ArrayList<Integer>();
 
             for(int j = 0; j < cnt; j++){
-                arr[i].add(Integer.parseInt(st.nextToken()));
-                dp[i].add(0);
+                // arr[i].add(Integer.parseInt(st.nextToken()));
+                arr[i][j] = Integer.parseInt(st.nextToken());
+                // dp[i].add(0);
             }
         }
 
-        dp[0].set(0, arr[0].get(0));
+        // dp[0].set(0, arr[0].get(0));
+        dp[0][0] = arr[0][0];
 
         for(int i = 0; i < n; i++){
 
-            int arr_len = dp[i].size();
+            // int arr_len = dp[i].size();
 
-            for(int j = 0; j < arr_len; j++) {
+            // for(int j = 0; j < arr_len; j++) {
+            for(int j = 0; j < i+1; j++) {
 
                 if(i+1 < n){
 
-                    dp[i+1].set(j, Math.max(Math.max(arr[i+1].get(j) + dp[i].get(j), arr[i+1].get(j)), dp[i+1].get(j)));
-                    dp[i+1].set(j+1, Math.max(Math.max(arr[i+1].get(j+1) + dp[i].get(j), arr[i+1].get(j+1)), dp[i+1].get(j+1)));
+                    // dp[i+1].set(j, Math.max(arr[i+1].get(j) + dp[i].get(j), dp[i+1].get(j)));
+                    dp[i+1][j] = Math.max(arr[i+1][j] + dp[i][j], dp[i+1][j]);
+                    // dp[i+1].set(j+1, Math.max(arr[i+1].get(j+1) + dp[i].get(j), dp[i+1].get(j+1)));
+                    dp[i+1][j+1] = Math.max(arr[i+1][j+1] + dp[i][j], dp[i+1][j+1]);
 
                 }
             }
         }
 
-        System.out.println(Collections.max(dp[n-1]));
+        // System.out.println(Collections.max(dp[n-1]));
+        System.out.println(Arrays.stream(dp[n-1]).max().getAsInt());
 
     }
 }
