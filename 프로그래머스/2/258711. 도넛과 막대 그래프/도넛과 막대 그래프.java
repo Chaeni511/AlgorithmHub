@@ -8,12 +8,12 @@ class Solution {
 
     public int[] solution(int[][] edges) {
         
-        // edges를 map으로 만들기 
+        // 각 edge에서 오고 갈 수 있는 노드수 저장 
         for(int[] edge: edges) {
             int from = edge[0];
             int to = edge[1];
             
-            // 노드수 확인
+            // 전체 노드수 확인
             if (from > nodeCnt) {
                 nodeCnt = from;
             }
@@ -31,53 +31,33 @@ class Solution {
         
         for (int i = 1; i <= nodeCnt; i++) {
             int out = forward[i];
+            // 갈 수 있는 곳이 없을 때
+            // 막대 그래프
             if (out == 0) {
                 answer[2]++;
+                
+            // 갈 수 있는 곳이 2개 일 때
             } else if (out == 2) {
                 int in = backward[i];
+                
+                // 들어오는 노드가 있으면 8자 그래프
                 if (in > 0) {
                     answer[3]++;
+                    
+                // 들어오는 노드가 없으면 시작 정점
                 } else {
                     answer[0] = i;
                 }
+            // 갈 수 있는 노드가 2개 이상일 때
+            // 시작 정점
             } else if (out > 2) {
                 answer[0] = i;
             }       
         }
+        
+        // 도넛 그래프 개수
         answer[1] = forward[answer[0]] - answer[2] - answer[3];
         
         return answer;
     }
-    
-//     public void dfs(int n1) {
-//         if (visited[n1]) {
-//             return;
-//         }
-//         visited[n1] = 1;
-
-//         List<Integer> neighbors = map.get(n1);
-//         for(int n2: neighbors) {
-//             visited[n2] = 1;
-//             dfs(n2);
-//         }
-        
-//     }
 }
-
-// // 막대 그래프 마지막 노드
-// if (neighbors == null){
-//     answer[2]++;
-//     return;
-// }
-
-// // 도넛 그래프
-// if (visited[n1] == 1 && neighbors.size() == 1) {
-//     answer[1]++;
-//     return;
-// }
-
-// // 8자 그래프 교차점
-// if (neighbors.size() == 2) {
-//     answer[3]++;
-//     return;
-// }
