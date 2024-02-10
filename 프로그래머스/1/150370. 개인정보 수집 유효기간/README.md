@@ -1,10 +1,10 @@
 # [level 1] 개인정보 수집 유효기간 - 150370 
 
-[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/150370) 
+[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/150370?language=java) 
 
 ### 성능 요약
 
-메모리: 10.3 MB, 시간: 0.21 ms
+메모리: 79.7 MB, 시간: 6.31 ms
 
 ### 구분
 
@@ -16,7 +16,7 @@
 
 ### 제출 일자
 
-2024년 2월 6일 16:39:52
+2024년 2월 6일 17:42:35
 
 ### 문제 설명
 
